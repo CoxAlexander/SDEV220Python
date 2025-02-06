@@ -1,4 +1,4 @@
-import SQLAlchemy  
+import SQLAlchemy   # type: ignore
 engine = SQLAlchemy.create_engine("sqlite:///books.db")
 conn = engine.connect()
 sql = SQLAlchemy.text("SELECT title from book")
