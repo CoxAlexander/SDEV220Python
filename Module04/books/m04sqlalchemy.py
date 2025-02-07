@@ -1,9 +1,12 @@
-import SQLAlchemy   # type: ignore
-engine = SQLAlchemy.create_engine("sqlite:///books.db")
+import sqlalchemy as sa
+
+engine = sa.create_engine('sqlite:///book.db')
 conn = engine.connect()
-sql = SQLAlchemy.text("SELECT title from book")
+sql = sa.text('SELECT title FROM book ORDER BY title')
 rows = conn.execute(sql)
+
 for row in rows:
     print("title:", row[0])
+    
 conn.close()
 engine.dispose()
