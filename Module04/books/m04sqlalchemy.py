@@ -1,4 +1,4 @@
-import sqlalchemy as sa
+import sqlalchemy as sa  # type: ignore
 
 engine = sa.create_engine('sqlite:///book.db')
 conn = engine.connect()
