@@ -48,11 +48,10 @@ def delete_book(id):
     db.session.delete(book)
     db.session.commit()
     return {"message": "yeet!"}
-@app.route('/books/<id>',methods=['PUT'])
+@app.route('/books/<id>', methods=['PUT'])
 def update_book(id):
     book = Book.query.get_or_404(id)
-    data = {"book_name" : request.json['book_name'],"author" :request.json['author'], "publisher" : request.json['publisher']}
-    book.id = id
+    data = {"id" : id, "book_name" : request.json['book_name'],"author" :request.json['author'], "publisher" : request.json['publisher']}
     book.book_name = data.update('book_name', book.book_name)
     book.author = data.update('author', book.author)
     book.publisher = data.update('publisher', book.publisher)
