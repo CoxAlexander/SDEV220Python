@@ -50,14 +50,14 @@ def delete_book(id):
     return {"message": "yeet!"}
 @app.route('/books/<id>', methods=['PUT'])
 def update_book(id):
-    book = Book.query.get_or_404(id)
-    data = {"id" : id, "book_name" : request.json['book_name'],"author" :request.json['author'], "publisher" : request.json['publisher']}
-    book.book_name = data.update('book_name', book.book_name)
-    book.author = data.update('author', book.author)
-    book.publisher = data.update('publisher', book.publisher)
-
+    book = Book.query.get(id)
+    if book is None:
+        return {'error': 'not found'}
+    book.name = request.json['book_name']
+    book.author = request.json['author']
+    book.publisher = request.json['publisher']
     db.session.commit()
-    return {'message': 'Book updated successfully', 'book': id}, 200
+    return {'message': 'updated'}
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
